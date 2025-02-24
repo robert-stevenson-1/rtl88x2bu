@@ -1,3 +1,25 @@
+# Jetson Nano Specific Modifications
+
+The makefile was changed so that `CONFIG_PLATFORM_I386_PC = y` became `CONFIG_PLATFORM_I386_PC = n`, and then enabled `CONFIG_PLATFORM_ARM_NV_NANO = n` to be `CONFIG_PLATFORM_ARM_NV_NANO = y`.
+> TLDR Changes: _makefile_
+> ```text
+> CONFIG_PLATFORM_I386_PC = n
+> …
+> CONFIG_PLATFORM_ARM_NV_NANO = y
+> ```
+
+## Installation steps
+On the Jetson Nano, `cd` into this repo and run these commands in order:
+```sh
+make
+sudo make install
+sudo modprobe 88x2bu
+```
+Be aware that `make` takes awhile on the jetson to build and will display a lot of warnings during the process. These warnings can be ignored.
+
+Once you have done everything just reboot and connect your device.
+
+
 # Pending Deprecation
 
 A few versions ago (around 6.4 IIRC), rtw88x2bu support has been added to the mainline Linux kernel.  This repo will be maintained until we either receive a few comments on https://github.com/cilynx/rtl88x2bu/issues/270 that the mainline driver is working well or [MaxG87](https://github.com/MaxG87) and [cilynx](https://github.com/cilynx) agree that no feedback means no one is still using this driver and we make the executive decision to archive it.
